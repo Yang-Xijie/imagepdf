@@ -14,10 +14,11 @@ for pdf in **/*.pdf; do
 
     # generate temp pngs
     # 300 is a common dpi for pdf
-    convert -density 300 "$pdf" temp.png
+    convert -density 300 "$pdf" temp-%03d.png
 
     # merge temp pngs to pdf
-    convert temp-*.png "${pdf%.*}""_image"".pdf"
+    # pay attention to the order: use %3d instead
+    convert temp-*.png "${pdf%.*}"" [image]"".pdf"
 
     # remove temp pngs
     rm temp-*.png
